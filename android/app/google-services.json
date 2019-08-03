@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "103783531960",
+    "firebase_url": "https://domemodern.firebaseio.com",
+    "project_id": "domemodern",
+    "storage_bucket": "domemodern.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103783531960:android:2cc4a924f8603a96",
+        "android_client_info": {
+          "package_name": "th.co.modernfurniture.dome_modern"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103783531960-r6qvdngovc0cbbe72c8sa0p6kpm2h0c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApXsBTJ_07jhkpELop7aNNynOMkEOvB-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103783531960-r6qvdngovc0cbbe72c8sa0p6kpm2h0c0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
