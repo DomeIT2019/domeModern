@@ -1,3 +1,4 @@
+import 'package:dome_modern/screens/register.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -26,7 +27,13 @@ class _HomeState extends State<Home> {
           borderRadius: BorderRadius.circular(18.0),
         ),
         child: Text('SIGN UP'),
-        onPressed: () {},
+        onPressed: () {
+          print('You Click Signup');
+          // Route
+          var registerRoute =
+              MaterialPageRoute(builder: (BuildContext context) => Register());
+          Navigator.of(context).push(registerRoute);
+        },
       ),
     );
   }
