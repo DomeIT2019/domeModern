@@ -118,10 +118,7 @@ class _RegisterState extends State<Register> {
 
 // Create Thread for upload email and Password to Authen of Firebase
   Future<void> registerFirebase() async {
-    // Create Instanace on Object123
-
-
-
+    // Create Instanace on Object
     await firebaseAuth
         .createUserWithEmailAndPassword(
             email: emailString, password: passwordString)
