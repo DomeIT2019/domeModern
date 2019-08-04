@@ -1,4 +1,6 @@
+import 'package:dome_modern/screens/my_service.dart';
 import 'package:dome_modern/screens/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -10,8 +12,26 @@ class _HomeState extends State<Home> {
 // Explicit
   double myWidth = 90.0;
   String nameApp = 'โมเดิร์นเฟอร์นิเจอร์';
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
 // Method
+
+  @override
+  void initState() {
+    super.initState();
+    checkStatus();
+  }
+
+  Future<void> checkStatus() async {
+    FirebaseUser firebaseUser = await firebaseAuth.currentUser();
+    if (firebaseUser != null) {
+      var myServiceRoute =
+          MaterialPageRoute(builder: (BuildContext context) => MyService());
+      Navigator.of(context)
+          .pushAndRemoveUntil(myServiceRoute, (Route<dynamic> route) => false);
+    }
+  }
+
   Widget mySizebox() {
     return SizedBox(
       height: 16.0,
