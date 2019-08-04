@@ -1,4 +1,7 @@
+import 'package:dome_modern/screens/my_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class _RegisterState extends State<Register> {
   Color myBlue = Color.fromARGB(255, 239, 108, 147);
   final formKey = GlobalKey<FormState>();
   String nameString, emailString, passwordString;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   // Method
   Widget nameText() {
@@ -106,7 +110,82 @@ class _RegisterState extends State<Register> {
           formKey.currentState.save();
           print(
               'name = $nameString, email = $emailString, password = $emailString');
+          registerFirebase();
         }
+      },
+    );
+  }
+
+// Create Thread for upload email and Password to Authen of Firebase
+  Future<void> registerFirebase() async {
+    // Create Instanace on Object123
+
+
+
+    await firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailString, password: passwordString)
+        .then((response) {
+      print('Register Success');
+      setUPDisplayName();
+    }).catchError((response) {
+      print('Error ==> ${response.toString()}');
+      String title = response.code;
+      String message = response.message;
+      //alert popup
+      myAlert(title, message);
+    });
+  }
+
+  Future<void> setUPDisplayName() async {
+    await firebaseAuth.currentUser().then((response) {
+      UserUpdateInfo userUpdateInfo = UserUpdateInfo();
+      userUpdateInfo.displayName = nameString;
+      response.updateProfile(userUpdateInfo);
+
+    // Create Route Without Arrow Back
+    var myServiceRoute = MaterialPageRoute(builder: (BuildContext context) => MyService());
+    Navigator.of(context).pushAndRemoveUntil(myServiceRoute, (Route<dynamic> route) => false);
+
+
+
+    });
+  }
+
+  Widget alerButtont() {
+    return FlatButton(
+        child: Text('OK'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        });
+  }
+
+  Widget showTitle(String titleString) {
+    return ListTile(
+      leading: Icon(
+        Icons.add_alert,
+        size: 48.0,
+        color: Colors.orange[800],
+      ),
+      title: Text(
+        titleString,
+        style: TextStyle(
+          color: Colors.red,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  void myAlert(String titleString, String messageString) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: showTitle(titleString),
+          content: Text(messageString),
+          actions: <Widget>[alerButtont()],
+        );
       },
     );
   }
